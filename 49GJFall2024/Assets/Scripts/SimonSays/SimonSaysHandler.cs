@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -11,10 +12,12 @@ public class SimonSaysHandler : MonoBehaviour
     public static SimonSaysHandler instance;
 
     public enum GameState {
+        GAME_SETUP,
         INIT,
         PLAYER_TURN,
         GENERATE_PATTERN,
-        SHOW_PATTERN
+        SHOW_PATTERN,
+        DONE
     }
 
     public List<GameObject> colorsObj;
@@ -30,6 +33,11 @@ public class SimonSaysHandler : MonoBehaviour
     public float cooldownTimer;
     public int curPatternIndex;
     public Color saveColor;
+
+    public AudioSource failAudioSource;
+    public AudioClip failAudioClip;
+    public int endAtPattern = 7;
+    public float doneDelay = 1.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -60,6 +68,13 @@ public class SimonSaysHandler : MonoBehaviour
     {
         switch(curGameState)
         {
+            case GameState.GAME_SETUP:
+                initialCooldown -= Time.deltaTime;
+                if (initialCooldown <= 0.0f)
+                {
+                    curGameState = GameState.INIT;
+                }
+            break;
             case GameState.INIT:
                 cooldownTimer -= Time.deltaTime;
                 if (cooldownTimer <= 0.0f)
@@ -68,11 +83,11 @@ public class SimonSaysHandler : MonoBehaviour
                 }
             break;
             case GameState.GENERATE_PATTERN:
-                order.Clear();
-                for (int i = 0; i < numPatterns; i++)
-                {
-                    order.Add(UnityEngine.Random.Range(0, 4));
-                }
+                //order.Clear();
+                //for (int i = 0; i < numPatterns; i++)
+                //{
+                order.Add(UnityEngine.Random.Range(0, 4));
+                //}
                 curGameState = GameState.SHOW_PATTERN;
                 curPatternIndex = -1;
                 cooldownTimer = 0.0f;
@@ -104,6 +119,13 @@ public class SimonSaysHandler : MonoBehaviour
                     cooldownTimer -= Time.deltaTime;
                 }
             break;
+            case GameState.DONE:
+                doneDelay -= Time.deltaTime;
+                if (doneDelay <= 0.0f)
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                }
+            break;
         }
     }
 
@@ -113,20 +135,32 @@ public class SimonSaysHandler : MonoBehaviour
         {
             return;
         }
-        colors[index].Press();
+        
         if (order[curPatternIndex] != index)
         {
+            failAudioSource.clip = failAudioClip;
+            order.Clear();
+            numPatterns = 1;
+            failAudioSource.Play();
             curPatternIndex = 0;
             StartInit();
         }
         else
         {
+            colors[index].Press();
             curPatternIndex += 1;
             if (curPatternIndex == order.Count)
             {
                 curPatternIndex = 0;
                 numPatterns += 1;
-                StartInit();
+                if (numPatterns == endAtPattern)
+                {
+                    curGameState = GameState.DONE;
+                }
+                else
+                {
+                    StartInit();
+                }
             }
         }
     }

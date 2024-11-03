@@ -3,6 +3,8 @@ Norm Find Puzzle Partners (Final title to be determined"
 Game has a Previously button on the main menu
 This game is about Norm telling people the good news about the puzzle palace
 
+ffmpeg -i 0001-0180.webm -c:v libvpx -b:v 1M -c:a libvorbis  0001-0180fixed.webm
+
 Al's Theme:
 I am Al | An exceptional guy
 People who like puzzles | We should crucify
@@ -29,9 +31,9 @@ GAME START (Na = Narrator):
 		Dunk on puzzles
 	Scene: You start to hear a dreadful speech. Almost like a poem but it fills you with dread and a little anticipation.
 	"What will you do??"
-		Run
-		Run!
-		Dunk on puzzles while running
+		**Run
+		**Run!
+		**Dunk on puzzles while running
 	Scene: The speech gets louder. You don't know what you're running from but you don't want to know
 	Scene: The speech stops.
 	Na: With the sudden silence you wonder if you escaped
@@ -65,3 +67,6 @@ GAME START (Na = Narrator):
 		Walk down the tunnel
 	Na: You walk down the tunnel
 	Scene: You hear an odd chanting in the distance
+	
+Na: "You stumble upon a maze. You can feel it drawing you in."
+Na: "What will you do? Enter the maze. Dunk on Puzzles"

@@ -12,6 +12,9 @@ public class SimonButtonScript : MonoBehaviour
 
     public UnityEngine.UI.Image image;
 
+    public AudioClip audioClip;
+    public AudioSource audioSource;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,6 +39,8 @@ public class SimonButtonScript : MonoBehaviour
 
     public void Press()
     {
+        audioSource.clip = audioClip;
+        audioSource.Play();
         image.color = Color.white;
         curCoolDownTimer = patternCooldown;
         pressed = true;

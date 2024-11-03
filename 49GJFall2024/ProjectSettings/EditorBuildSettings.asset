@@ -4,5 +4,36 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 662df5855db471c6caf87b381f12b83d
+  - enabled: 1
+    path: Assets/Scenes/AlIntro.unity
+    guid: 38915ca71333bbe16ab53e1795d3f182
+  - enabled: 1
+    path: Assets/Scenes/AlCaveWakeup.unity
+    guid: 1633f8ab289030ad099a9b0507972a78
+  - enabled: 1
+    path: Assets/Scenes/SimonSays.unity
+    guid: c38f008eeb0628c34b38defb9f00e879
+  - enabled: 1
+    path: Assets/Scenes/AlSimonFinish.unity
+    guid: 961e4d176d407080c8d6934deb13185e
+  - enabled: 1
+    path: Assets/Scenes/AlToMaze.unity
+    guid: c0830504af17e2cde97f6bac81804606
+  - enabled: 1
+    path: Assets/Scenes/Maze.unity
+    guid: 41bfaf9ea479f35519f600dc5771a902
+  - enabled: 1
+    path: Assets/Scenes/AlLeaveMaze.unity
+    guid: f4ea64a1361387a028b7fdc9be57a946
+  - enabled: 1
+    path: Assets/Scenes/AlFinallyCompleted.unity
+    guid: 7f7095ea116ec3ec3a8282f9c11a4e59
+  - enabled: 1
+    path: Assets/Scenes/NormRecap.unity
+    guid: 87e3aa58a15412ddb91e3ad05a20a063
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
